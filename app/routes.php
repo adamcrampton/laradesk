@@ -1,6 +1,4 @@
 <?php
 
-Route::get('/', function()
-{
-	return View::make('home');
-});
+// General GET routes
+Route::get('/', 'PagesController@index');

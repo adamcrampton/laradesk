@@ -20,7 +20,7 @@
     <![endif]-->
 
     <!-- Additional CSS -->
-    <link href="../app/assets/css/main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
 
   <body>
@@ -50,8 +50,7 @@
 
     <div class="container page">
       <div>
-        <h1>Laravel Helpdesk Project</h1>
-        <p class="lead">This will be the homepage, login to be implemented.</p>
+        @yield('content')
       </div>
 
     </div><!-- /.container -->
@@ -62,5 +61,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/js/utilities.js"></script>
   </body>
 </html>
