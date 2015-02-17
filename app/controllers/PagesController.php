@@ -4,7 +4,7 @@ class PagesController extends BaseController
 {
 	public function __construct()
 	{
-		
+		$this->beforeFilter('staff');
 	}
 
 	public function index()

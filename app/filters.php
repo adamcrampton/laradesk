@@ -54,6 +54,32 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+
+// For editing users, other developer functions
+Route::filter('admin', function() 
+{
+	if (Auth::guest())
+	{
+		return Redirect::guest('login');
+	}
+
+	if (! Auth::user()->isAdmin())
+	{
+		return Redirect::to('/admin')->with('need_admin', 'Sorry, you need at least admin privleges for this.');
+	}
+
+});
+
+// For staff login
+Route::filter('staff', function() 
+{
+	if (Auth::guest() || !Auth::user()->isStaff())
+	{
+		return Redirect::route('sessions.create')->with('need_staff', 'Please log in to access this area.');
+	}
+
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
