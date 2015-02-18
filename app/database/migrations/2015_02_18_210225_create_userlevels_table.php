@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserlevelTable extends Migration {
+class CreateUserlevelsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,10 @@ class CreateUserlevelTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('userlevel', function(Blueprint $table)
+		Schema::create('userlevels', function(Blueprint $table)
 		{
-			$table->increments('userlevel_id');
-			$table->string('userlevel_name')->unique();
-			$table->timestamps();
+			$table->increments('userlevels_id');
+			$table->string('userlevels_name')->unique();
 		});
 	}
 
@@ -27,7 +26,7 @@ class CreateUserlevelTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('userlevel');
+		Schema::drop('userlevels');
 	}
 
 }

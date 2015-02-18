@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePriorityTable extends Migration {
+class CreatePrioritiesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreatePriorityTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('priority', function(Blueprint $table)
+		Schema::create('priorities', function(Blueprint $table)
 		{
-			$table->increments('priority_id');
-			$table->string('priority_name')->unique();
+			$table->increments('priorities_id');
+			$table->string('priorities_name')->unique();
 		});
 	}
 
@@ -26,7 +26,7 @@ class CreatePriorityTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('priority');
+		Schema::drop('priorities');
 	}
 
 }
