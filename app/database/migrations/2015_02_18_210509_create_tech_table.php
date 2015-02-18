@@ -16,6 +16,7 @@ class CreateTechTable extends Migration {
 		{
 			$table->increments('tech_id');
 			$table->string('tech_name')->unique();
+			$table->timestamps();
 		});
 	}
 

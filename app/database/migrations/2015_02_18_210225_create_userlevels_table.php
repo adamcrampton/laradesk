@@ -16,6 +16,7 @@ class CreateUserlevelsTable extends Migration {
 		{
 			$table->increments('userlevels_id');
 			$table->string('userlevels_name')->unique();
+			$table->timestamps();
 		});
 	}
 

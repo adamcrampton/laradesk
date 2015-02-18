@@ -20,7 +20,7 @@
     <![endif]-->
 
     <!-- Additional CSS -->
-    <link href="{{ public_path() }}/css/main.css" rel="stylesheet">
+    <link href="/helpdesk/public/css/main.css" rel="stylesheet">
   </head>
 
   <body>

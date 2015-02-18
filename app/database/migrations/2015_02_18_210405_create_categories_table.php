@@ -16,6 +16,7 @@ class CreateCategoriesTable extends Migration {
 		{
 			$table->increments('categories_id');
 			$table->string('categories_name')->unique();
+			$table->timestamps();
 		});
 	}
 

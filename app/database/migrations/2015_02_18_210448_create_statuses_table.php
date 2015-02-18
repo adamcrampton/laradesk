@@ -16,6 +16,7 @@ class CreateStatusesTable extends Migration {
 		{
 			$table->increments('statuses_id');
 			$table->string('statuses_name')->unique();
+			$table->timestamps();
 		});
 	}
 

@@ -16,6 +16,7 @@ class CreatePrioritiesTable extends Migration {
 		{
 			$table->increments('priorities_id');
 			$table->string('priorities_name')->unique();
+			$table->timestamps();
 		});
 	}
 
