@@ -2,7 +2,7 @@
 
 @section('content')
         
-<h1>Laravel Helpdesk Project</h1>
-<p class="lead">This will be the homepage, login to be implemented.</p>
+<h1>Laradesk Helpdesk</h1>
+<p class="lead">Select an option below:</p>
 
 @stop

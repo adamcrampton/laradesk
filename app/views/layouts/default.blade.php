@@ -42,7 +42,8 @@
             <li><a href="#">Create Ticket</a></li>
             <li><a href="#">Show Tickets</a></li>
             <li><a href="#">Admin Area</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

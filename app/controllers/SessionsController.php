@@ -26,7 +26,7 @@ class SessionsController extends BaseController
 	{
 		Auth::logout();
 
-		return Redirect::route('home.index');
+		return Redirect::to('/');
 	}
 
 }

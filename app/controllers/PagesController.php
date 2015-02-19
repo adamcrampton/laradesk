@@ -4,6 +4,7 @@ class PagesController extends BaseController
 {
 	public function __construct()
 	{
+		// Session::flush();
 		$this->beforeFilter('staff');
 	}
 
