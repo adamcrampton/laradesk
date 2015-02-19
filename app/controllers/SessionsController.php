@@ -11,13 +11,10 @@ class SessionsController extends BaseController
 
 	public function store()
 	{
-		$credentials = Input::only('email', 'password');
+		$credentials = Input::only('users_email', 'password');
 
 		if (Auth::attempt($credentials))
 		{
-			// Find out if this person is set to Staff level auth, and redirect to Wiki if so (note: Auth already done at this point)
-			$auth_level = User::whereEmail(Input::get('email'))->first()->users_user_level_fk;
-
 			return View::make('pages.home');
 		}
 

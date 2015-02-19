@@ -15,8 +15,8 @@
 
 	{{ Form::open(['route' => 'sessions.store']) }}
 	<div class="input-group">
-		{{ Form::label('email', 'Email:') }}
-		{{ Form:: email('email', null, array('class' => 'form-control')) }}
+		{{ Form::label('users_email', 'Email:') }}
+		{{ Form:: email('users_email', null, array('class' => 'form-control')) }}
 	</div>
 	<div class="input-group">
 		{{ Form::label('password', 'Password:') }}

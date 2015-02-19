@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->tinyInteger('users_userlevels_fk');
 			$table->string('users_email')->unique();
 			$table->string('users_username')->unique();
-			$table->string('users_password');
+			$table->string('password');
 			$table->timestamps();
 		});
 	}

@@ -52,7 +52,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function isAdmin()
 	{
-		if(Auth::user()->user_userlevel_fk == "1")
+		if(Auth::user()->users_userlevel_fk == "1")
 		{
 			return true;
 		}
@@ -62,7 +62,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	public function isStaff()
 	{
-		if(Auth::user()->user_userlevel_fk == "1" || Auth::user()->user_userlevel_fk == "2")
+		if(Auth::user()->users_userlevel_fk == "1" || Auth::user()->user_userlevel_fk == "2")
 		{
 			return true;
 		}
