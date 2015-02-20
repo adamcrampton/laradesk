@@ -91,3 +91,49 @@ class UsersTableSeeder extends Seeder {
 	}
 
 }
+
+class CategoriesTableSeeder extends Seeder {
+
+	public function run()
+	{
+		DB::table('categories')->delete();
+	}
+
+}
+
+class PrioritiesTableSeeder extends Seeder {
+
+	public function run()
+	{
+		DB::table('priorities')->delete();
+	}
+
+}
+
+class StatusesTableSeeder extends Seeder {
+
+	public function run()
+	{
+		DB::table('statuses')->delete();
+	}
+
+}
+
+class TechTableSeeder extends Seeder {
+
+	public function run()
+	{
+		DB::table('tech')->delete();
+	}
+
+}
+
+class MasterTableSeeder extends Seeder {
+
+	public function run()
+	{
+		DB::table('master')->delete();
+
+	}
+
+}
