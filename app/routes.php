@@ -4,7 +4,6 @@
 Route::get('/', 'PagesController@index');
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');
-Route::get('contact', 'PagesController@show_contact');
 
 // Passwords
 Route::controller('password', 'RemindersController');

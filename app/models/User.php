@@ -66,12 +66,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		return false;	
 	}
+
+	public function isSupport()
+	{
+		$userlevel_name = $this->get_userlevel();
+
+		if($userlevel_name == 'admin' || $userlevel_name == 'support')
+		{
+			return true;
+		}
+
+		return false;
+	}
 	
 	public function isStaff()
 	{
 		$userlevel_name = $this->get_userlevel();
 
-		if($userlevel_name == 'admin' || $userlevel_name == 'staff')
+		if($userlevel_name == 'admin' || $userlevel_name == 'support' || $userlevel_name == 'staff')
 		{
 			return true;
 		}

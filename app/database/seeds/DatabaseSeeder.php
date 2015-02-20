@@ -28,6 +28,7 @@ class UserlevelsTableSeeder extends Seeder {
 
 		$userlevels_array = array(
 			array('userlevels_name' => 'admin'),
+			array('userlevels_name' => 'support'),
 			array('userlevels_name' => 'staff'),
 		);
 
@@ -47,6 +48,7 @@ class UsersTableSeeder extends Seeder {
 		DB::table('users')->delete();
 	
 		$admin_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'admin')->first()->userlevels_id;
+		$support_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'support')->first()->userlevels_id;
 		$staff_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'staff')->first()->userlevels_id;
 		$stamp = date('Y-m-d H:i:s');
 
@@ -59,6 +61,16 @@ class UsersTableSeeder extends Seeder {
 					'created_at' => $stamp,
 					'updated_at' => $stamp,
 				),
+
+				array(
+					'users_username' => 'support',
+					'users_email' => 'support@companyname.com.au',
+					'users_userlevels_fk' => $support_userlevel,
+					'password' => Hash::make('password'),
+					'created_at' => $stamp,
+					'updated_at' => $stamp,
+				),
+
 
 				array(
 					'users_username' => 'staff',
