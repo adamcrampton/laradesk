@@ -17,7 +17,6 @@ class CreateMasterTable extends Migration {
 			$table->increments('master_id');
 			$table->string('master_description');
 			$table->tinyInteger('master_users_fk');
-			$table->tinyInteger('master_tech_fk');
 			$table->tinyInteger('master_categories_fk');
 			$table->tinyInteger('master_priorities_fk');
 			$table->tinyInteger('master_statuses_fk');
