@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('UserlevelsTableSeeder');
 		$this->command->info('Userlevels table seeded.');
 
-		// $this->call('UsersTableSeeder');
-		// $this->command->info('Users table seeded.');
+		$this->call('UsersTableSeeder');
+		$this->command->info('Users table seeded.');
 
 		$this->call('CategoriesTableSeeder');
 		$this->command->info('Categories table seeded.');
@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('StatusesTableSeeder');
 		$this->command->info('Statuses table seeded.');
 
-		// $this->call('MasterTableSeeder');
-		// $this->command->info('Master table seeded.');
+		$this->call('MasterTableSeeder');
+		$this->command->info('Master table seeded.');
 	}
 
 }
@@ -76,9 +76,9 @@ class UsersTableSeeder extends Seeder {
 	{
 		DB::table('users')->delete();
 	
-		$admin_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'admin')->first()->userlevels_id;
-		$support_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'support')->first()->userlevels_id;
-		$staff_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'staff')->first()->userlevels_id;
+		$admin_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'Admin User')->first()->userlevels_id;
+		$support_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'Support User')->first()->userlevels_id;
+		$staff_userlevel = DB::table('userlevels')->select('userlevels_id')->where('userlevels_name', 'Staff User')->first()->userlevels_id;
 		
 		$stamp = date('Y-m-d H:i:s');
 
@@ -256,10 +256,10 @@ class MasterTableSeeder extends Seeder {
 
 		$stamp = date('Y-m-d H:i:s');
 
-		$staff_user = DB::table('users')->select('users_id')->where('users_username', 'Staff User')->first()->users_id;
+		$staff_user = DB::table('users')->select('users_id')->where('users_username', 'staff')->first()->users_id;
 		$printer_category = DB::table('categories')->select('categories_id')->where('categories_name', 'Printer')->first()->categories_id;
-		$medium_priority = DB::table('priorities')->select('priorities_id')->where('priorities_id', 'Medium')->first()->priorities_id;
-		$open_status = DB::table('statuses')->select('statuses_id')->where('statuses_id', 'Open')->first()->statuses_id;
+		$medium_priority = DB::table('priorities')->select('priorities_id')->where('priorities_name', 'Medium')->first()->priorities_id;
+		$open_status = DB::table('statuses')->select('statuses_id')->where('statuses_name', 'Open')->first()->statuses_id;
 
 		$master_array = array(
 			array(
