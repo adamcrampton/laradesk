@@ -83,7 +83,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		$userlevel_name = $this->get_userlevel();
 
-		if($userlevel_name == 'Admin User' || $userlevel_name == 'Support User' || $userlevel_name == 'Admin User')
+		if($userlevel_name == 'Admin User' || $userlevel_name == 'Support User' || $userlevel_name == 'Staff User')
 		{
 			return true;
 		}
