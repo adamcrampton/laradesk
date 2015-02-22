@@ -257,6 +257,7 @@ class MasterTableSeeder extends Seeder {
 		$stamp = date('Y-m-d H:i:s');
 
 		$staff_user = DB::table('users')->select('users_id')->where('users_username', 'staff')->first()->users_id;
+		$support_user = DB::table('users')->select('users_id')->where('users_username', 'support')->first()->users_id;
 		$printer_category = DB::table('categories')->select('categories_id')->where('categories_name', 'Printer')->first()->categories_id;
 		$medium_priority = DB::table('priorities')->select('priorities_id')->where('priorities_name', 'Medium')->first()->priorities_id;
 		$open_status = DB::table('statuses')->select('statuses_id')->where('statuses_name', 'Open')->first()->statuses_id;
@@ -264,7 +265,8 @@ class MasterTableSeeder extends Seeder {
 		$master_array = array(
 			array(
 					'master_description' => 'Looks like the printer is out of toner',
-					'master_users_fk' => $staff_user,
+					'master_belongs_to_users_fk' => $staff_user,
+					'master_assigned_to_users_fk' => $support_user,
 					'master_categories_fk' => $printer_category,
 					'master_priorities_fk' => $medium_priority,
 					'master_statuses_fk' => $open_status,

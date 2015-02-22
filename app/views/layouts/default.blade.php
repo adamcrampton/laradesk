@@ -38,7 +38,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="/">Home</a></li>
             <li><a href="#">Create Ticket</a></li>
             <li><a href="#">Show Tickets</a></li>
             <li><a href="#">Admin Area</a></li>
@@ -50,10 +50,7 @@
     </div>
 
     <div class="container page">
-      <div>
         @yield('content')
-      </div>
-
     </div><!-- /.container -->
 
 

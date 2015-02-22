@@ -59,7 +59,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		$userlevel_name = $this->get_userlevel();
 
-		if($userlevel_name == 'admin')
+		if($userlevel_name == 'Admin User')
 		{
 			return true;
 		}
@@ -71,7 +71,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		$userlevel_name = $this->get_userlevel();
 
-		if($userlevel_name == 'admin' || $userlevel_name == 'support')
+		if($userlevel_name == 'Admin User' || $userlevel_name == 'Support User')
 		{
 			return true;
 		}
@@ -83,7 +83,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		$userlevel_name = $this->get_userlevel();
 
-		if($userlevel_name == 'admin' || $userlevel_name == 'support' || $userlevel_name == 'staff')
+		if($userlevel_name == 'Admin User' || $userlevel_name == 'Support User' || $userlevel_name == 'Admin User')
 		{
 			return true;
 		}
