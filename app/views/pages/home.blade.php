@@ -25,7 +25,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<a class="btn btn-primary">View Tickets</a>
+		<a href="/tickets" class="btn btn-primary">View Tickets</a>
 	</div>
 </div>
 

@@ -40,7 +40,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="#">Create Ticket</a></li>
-            <li><a href="#">Show Tickets</a></li>
+            <li><a href="/tickets">Show Tickets</a></li>
             <li><a href="#">Admin Area</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/logout">Logout</a></li>
