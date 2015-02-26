@@ -30,7 +30,17 @@ class TicketsController extends BaseController
 			// Create ticket object
 			$ticket = $this->tickets->whereMaster_id($ticket_id)->first();
 
-			return View::make('tickets.show', ['ticket' => $ticket]);
+			// Create array of vars for various ticket attributes
+			$attributes = [
+				'staff_users_list' => User::lists('users_username', 'users_id'),
+				'support_users_list' => User::lists('users_username', 'users_id'),
+				'categories_list' => Category::lists('categories_name', 'categories_id'),
+				'priorities_list' => Priority::lists('priorities_name', 'priorities_id'),
+				'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
+			];
+			
+
+			return View::make('tickets.show', ['ticket' => $ticket, 'attributes' => $attributes]);
 		}
 
 		return Redirect::to('/')->with('no_ticket', 'Sorry, this ticket does not exist. Please contact support.');

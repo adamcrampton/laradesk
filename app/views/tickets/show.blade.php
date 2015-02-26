@@ -12,14 +12,34 @@
 	{{ Form::open(['method' => 'put', 'route' => 'tickets.update', 'files' => true]) }}
 
   	{{ Form::hidden('id', $ticket->master_id) }}
-  	<div class="col-md-6">
+  	<div class="col-md-4">
 		<div class="form-group">
 	  		{{ Form::label('submitted_by', 'Submitted By: ') }}
-			{{ Form::select('submitted_by', User::lists('users_username', 'users_id'), null, ['class' => 'form-control']) }}
+			{{ Form::select('submitted_by', $attributes['staff_users_list'], $ticket->belongs->users_id, ['class' => 'form-control']) }}
 			{{ $errors->first('submitted_by', '<span class="label label-danger">:message</span>') }}
 		</div>
+		<div class="form-group">
+	  		{{ Form::label('assigned_to', 'Assigned To: ') }}
+			{{ Form::select('assigned_to', $attributes['support_users_list'], $ticket->assigned->users_id, ['class' => 'form-control']) }}
+			{{ $errors->first('assigned_to', '<span class="label label-danger">:message</span>') }}
+		</div>
+		
 	</div>
-	<div class="col-md-6	">
+
+	<div class="col-md-4">
+		<div class="form-group">
+	  		{{ Form::label('category', 'Category: ') }}
+			{{ Form::select('category', $attributes['categories_list'], $ticket->category->categories_id, ['class' => 'form-control']) }}
+			{{ $errors->first('category', '<span class="label label-danger">:message</span>') }}
+		</div>
+		<div class="form-group">
+	  		{{ Form::label('status', 'Status: ') }}
+			{{ Form::select('status', $attributes['statuses_list'], $ticket->status->statuses_id, ['class' => 'form-control']) }}
+			{{ $errors->first('status', '<span class="label label-danger">:message</span>') }}
+		</div>
+	</div>
+
+	<div class="col-md-4">
 		<div id="content_doc_container" class="form-group has-feedback">
 			{{ Form::label('content_doc', 'Upload and insert document (max 8mb): ', array('class' => 'control-label')) }}
 			{{ Form::file('content_doc', array('class' => 'form-control')) }}
