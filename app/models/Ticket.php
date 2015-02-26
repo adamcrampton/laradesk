@@ -5,10 +5,9 @@ Class Ticket extends Eloquent
 	protected $table = 'master';
 	protected $primaryKey = 'master_id';
 
+	// DB Relationships
 	public function belongs()
 	{
-		// return User::where('users_id', $this->master_belongs_to_users_fk)->first()->users_username;
-
 		return $this->belongsTo('User', 'master_belongs_to_users_fk', 'users_id');
 	}
 

@@ -15,7 +15,7 @@ class TicketsController extends BaseController
 	{
 		$all_tickets = $this->tickets->all();
 
-		return View::make('tickets.index')->with(array('all_tickets' => $all_tickets));
+		return View::make('tickets.index', ['all_tickets' => $all_tickets]);
 	}
 		
 	public function create($create_type = null)
@@ -23,9 +23,18 @@ class TicketsController extends BaseController
 		
 	}
 
-	public function show($ticket_id = 0)
+	public function show($ticket_id = null)
 	{
-		
+		if ($ticket_id !== null)
+		{
+			// Create ticket object
+			$ticket = $this->tickets->whereMaster_id($ticket_id)->first();
+
+			return View::make('tickets.show', ['ticket' => $ticket]);
+		}
+
+		return Redirect::to('/')->with('no_ticket', 'Sorry, this ticket does not exist. Please contact support.');
+
 	}
 
 	public function store()
@@ -42,6 +51,8 @@ class TicketsController extends BaseController
 	{
 		if (Input::has('delete'))
 		{
+			#!# Add in delete method
+
 			return Redirect::back()->with('deleted', 'Records were deleted');
 		}
 

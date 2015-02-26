@@ -23,7 +23,7 @@
 			<tr>
 				<td>{{ $ticket->master_id }}</td>
 				<td>{{ $ticket->belongs->users_username }}</td>
-				<td>{{ $ticket->master_description }}</td>
+				<td>{{ link_to("/tickets/{$ticket->master_id}", $ticket->master_description) }}</td>
 				<td>{{ $ticket->category->categories_name }}</td>
 				<td>{{ $ticket->priority->priorities_name }}</td>
 				<td>{{ $ticket->assigned->users_username }}</td>
