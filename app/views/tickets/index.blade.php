@@ -22,11 +22,11 @@
 			@foreach ($all_tickets as $ticket)
 			<tr>
 				<td>{{ $ticket->master_id }}</td>
-				<td>{{ $ticket->belongs_to_user() }}</td>
+				<td>{{ $ticket->belongs->users_username }}</td>
 				<td>{{ $ticket->master_description }}</td>
 				<td>{{ $ticket->category->categories_name }}</td>
 				<td>{{ $ticket->priority->priorities_name }}</td>
-				<td>{{ $ticket->assigned_to_user() }}</td>
+				<td>{{ $ticket->assigned->users_username }}</td>
 				<td>{{ $ticket->status->statuses_name }}</td>
 			</tr>
 			@endforeach

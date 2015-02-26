@@ -5,16 +5,16 @@ Class Ticket extends Eloquent
 	protected $table = 'master';
 	protected $primaryKey = 'master_id';
 
-	public function belongs_to_user()
+	public function belongs()
 	{
-		return User::where('users_id', $this->master_belongs_to_users_fk)->first()->users_username;
+		// return User::where('users_id', $this->master_belongs_to_users_fk)->first()->users_username;
 
-		// return $this->belongsTo('User', 'users_id', 'master_belongs_to_users_fk');
+		return $this->belongsTo('User', 'master_belongs_to_users_fk', 'users_id');
 	}
 
-	public function assigned_to_user()
+	public function assigned()
 	{
-		return User::where('users_id', $this->master_assigned_to_users_fk)->first()->users_username;
+		return $this->belongsTo('User', 'master_assigned_to_users_fk', 'users_id');
 	}
 
 	public function category()
