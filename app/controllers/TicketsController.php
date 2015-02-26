@@ -2,7 +2,7 @@
 
 class TicketsController extends BaseController
 {
-	protected $content;
+	protected $tickets;
 
 	public function __construct(Ticket $tickets)
 	{
@@ -15,7 +15,7 @@ class TicketsController extends BaseController
 	{
 		$all_tickets = $this->tickets->all();
 
-		return View::make('tickets.index')->with('all_tickets', $all_tickets);
+		return View::make('tickets.index')->with(array('all_tickets' => $all_tickets));
 	}
 		
 	public function create($create_type = null)

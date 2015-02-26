@@ -18,18 +18,17 @@
 				<th>Assigned To</th>
 				<th>Status</th>
 			</thead>
-			@foreach ($all_tickets as $attribute)
-
+			
+			@foreach ($all_tickets as $ticket)
 			<tr>
-				<td>{{ $attribute->master_id }}</td>
-				<td>{{ $attribute->master_belongs_to_users_fk }}</td>
-				<td>{{ $attribute->master_description }}</td>
-				<td>{{ $attribute->master_categories_fk }}</td>
-				<td>{{ $attribute->master_priorities_fk }}</td>
-				<td>{{ $attribute->master_assigned_to_users_fk }}</td>
-				<td>{{ $attribute->master_statuses_fk }}</td>
+				<td>{{ $ticket->master_id }}</td>
+				<td>{{ $ticket->belongs_to_user() }}</td>
+				<td>{{ $ticket->master_description }}</td>
+				<td>{{ $ticket->category->categories_name }}</td>
+				<td>{{ $ticket->priority->priorities_name }}</td>
+				<td>{{ $ticket->assigned_to_user() }}</td>
+				<td>{{ $ticket->status->statuses_name }}</td>
 			</tr>
-
 			@endforeach
 		</table>
 	</div>
