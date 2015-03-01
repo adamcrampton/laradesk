@@ -30,6 +30,9 @@ class TicketsController extends BaseController
 			// Create ticket object
 			$ticket = $this->tickets->whereMaster_id($ticket_id)->first();
 
+			// Create array for comments related to this ticket
+			$comments = Comment::whereComments_master_fk($ticket_id)->get();
+
 			// Create array of vars for various ticket attributes
 			$attributes = [
 				'staff_users_list' => User::lists('users_username', 'users_id'),
@@ -39,8 +42,7 @@ class TicketsController extends BaseController
 				'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
 			];
 			
-
-			return View::make('tickets.show', ['ticket' => $ticket, 'attributes' => $attributes]);
+			return View::make('tickets.show', ['ticket' => $ticket, 'comments' => $comments, 'attributes' => $attributes]);
 		}
 
 		return Redirect::to('/')->with('no_ticket', 'Sorry, this ticket does not exist. Please contact support.');

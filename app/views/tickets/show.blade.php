@@ -55,11 +55,25 @@
 	</div>
 	<div class="col-md-12">
 		<hr />
+	</div>
+	<div class="col-md-6">
 		<div class="form-group">
 			{{ Form::label('description', 'Description: ') }} {{ $errors->first('description', '<span class="label label-danger">:message</span>') }}
 			{{ Form::textarea('description', $ticket->master_description, array('id' => 'content_editor', 'class' => 'form-control')) }}
 	  	</div>
+	</div>
+	<div class="col-md-6">
 	  	<div class="form-group"> 
+			{{ Form::label('comments', 'Comments: ') }} 
+			<ul>
+			@foreach($comments as $comment)
+				<li>{{ $comment->updated_at . ': ' . $comment->comments_comment }}</li>
+			@endforeach
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="form-group"> 
 			{{ Form::submit('Update', array('class' => 'btn btn-success')) }} 
 		</div>
 	</div>
