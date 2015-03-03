@@ -12,6 +12,8 @@ Route::controller('password', 'RemindersController');
 Route::resource('tickets', 'TicketsController');
 
 // Admin Routing
-// Route::resource('/users/roles', 'UserRolesController');
 Route::resource('users', 'UsersController');
 Route::resource('sessions', 'SessionsController');
+
+// Special Routes
+Route::post('ajax/ajax_add_comment', 'AjaxController@ajax_add_comment');
