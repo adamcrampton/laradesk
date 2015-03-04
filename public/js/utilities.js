@@ -1,4 +1,14 @@
-// General Scripts
+ /*    _ _   _ _ _ _            _____           _       _       
+ | |  | | | (_) (_) |          / ____|         (_)     | |      
+ | |  | | |_ _| |_| |_ _   _  | (___   ___ _ __ _ _ __ | |_ ___ 
+ | |  | | __| | | | __| | | |  \___ \ / __| '__| | '_ \| __/ __|
+ | |__| | |_| | | | |_| |_| |  ____) | (__| |  | | |_) | |_\__ \
+  \____/ \__|_|_|_|\__|\__, | |_____/ \___|_|  |_| .__/ \__|___/
+                        __/ |                    | |            
+                       |___/                     |_|  
+*/
+
+// Ticket Comments
 $(document).ready(function() 
 {
 	$('#submit_comment').on('click', function() {
@@ -6,6 +16,7 @@ $(document).ready(function()
 	});
 
 });
+
 
 // AJAX Functions
 function add_comment(event)

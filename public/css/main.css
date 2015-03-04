@@ -1,9 +1,22 @@
-/* LaraDesk Project CSS */
+/* LaraDesk CSS */
 
-/*Structural*/
+/* Structural */
 .page
 {
 	padding-top: 60px;
 }
 
 /* Bootstrap Fine Tuning */
+
+
+/* Ticket Show View */
+.comment_box
+{
+	height: 255px;
+	overflow-y: scroll;
+}
+
+.comment_box ul
+{
+	padding-left: 0;
+}

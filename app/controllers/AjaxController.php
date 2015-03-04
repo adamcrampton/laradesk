@@ -22,8 +22,8 @@ class AjaxController extends BaseController
 
 			// Add author and timestamp of new comment to comment text
 			$comment_stamp = $insert_comment->updated_at;
-
-			$comment_text = $comment_stamp . ' ' . $comment;
+			$comment_author = User::whereUsers_id($insert_comment->comments_users_fk)->first()->users_username;
+			$comment_text = 'By <strong>' . $comment_author . '</strong> at ' . $comment_stamp . '<br />' . $comment;
 
 			return json_encode(['comment_status' => 'success', 'comment_text' => $comment_text]);
 		}
