@@ -16,7 +16,8 @@ class CreateCommentsTable extends Migration {
 		{
 			$table->increments('comments_id');
 			$table->tinyInteger('comments_master_fk');
-			$table->string('comments_comment')->unique();
+			$table->tinyInteger('comments_users_fk');
+			$table->string('comments_comment');
 			$table->timestamps();
 		});
 	}

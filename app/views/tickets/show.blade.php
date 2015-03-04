@@ -11,7 +11,7 @@
 
 	{{ Form::open(['method' => 'put', 'route' => 'tickets.update', 'files' => true]) }}
 
-  	{{ Form::hidden('id', $ticket->master_id) }}
+  	{{ Form::hidden('ticket_id', $ticket->master_id, ['id' => 'ticket_id']) }}
   	<div class="col-md-4">
 		<div class="form-group">
 	  		{{ Form::label('submitted_by', 'Submitted By: ') }}
@@ -65,7 +65,7 @@
 	<div class="col-md-6">
 	  	<div class="form-group"> 
 			{{ Form::label('comments', 'Comments: ') }} {{ Form::button('Add Comment', ['class' => 'btn btn-xs btn-primary pull-right', 'data-toggle' => 'modal', 'data-target' => '#comment_modal']) }}
-			<ul>
+			<ul id="comment_list">
 			@foreach($comments as $comment)
 				<li>{{ $comment->updated_at . ': ' . $comment->comments_comment }}</li>
 			@endforeach

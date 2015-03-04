@@ -50,28 +50,22 @@
     </div>
 
     <div class="container page">
+
+    <div id="comment_add_success" class="alert alert-success alert-dismissible hide" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> Comment added.
+    </div>
+
+    <div id="comment_add_failed" class="alert alert-danger alert-dismissible hide" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sorry, there was a problem adding your comment.</strong> Please contact support.
+    </div>
+
         @yield('content')
     </div><!-- /.container -->
 
     <!-- Comment Modal -->
-    <div class="modal fade" id="comment_modal" tabindex="-1" role="dialog" aria-labelledby="comment_modal" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add comment to this ticket</h4>
-          </div>
-          <div class="modal-body">
-            {{ Form::textarea('comment_add', null, ['class' => 'form-control']) }}
-          </div>
-          <div class="modal-footer">
-            {{ Form::button('Cancel', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) }}
-            {{ Form::button('Add Comment', ['class' => 'btn btn-primary', 'id' => 'submit_comment']) }}
-          </div>
-        </div>
-      </div>
-    </div>
-
+    @include('modals.comment')
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
