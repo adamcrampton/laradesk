@@ -14,8 +14,8 @@ class TicketsController extends BaseController
 	public function index()
 	{
 		$all_tickets = $this->tickets->all();
-
-		return View::make('tickets.index', ['all_tickets' => $all_tickets]);
+                
+		return View::make('tickets.index', compact('all_tickets'));
 	}
 		
 	public function create($create_type = null)
