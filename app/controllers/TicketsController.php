@@ -20,7 +20,16 @@ class TicketsController extends BaseController
 		
 	public function create($create_type = null)
 	{
-		
+		// Create array of vars for various ticket attributes
+		$attributes = [
+			'staff_users_list' => User::lists('users_username', 'users_id'),
+			'support_users_list' => User::lists('users_username', 'users_id'),
+			'categories_list' => Category::lists('categories_name', 'categories_id'),
+			'priorities_list' => Priority::lists('priorities_name', 'priorities_id'),
+			'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
+		];
+
+		return View::make('tickets.create', ['attributes' => $attributes]);
 	}
 
 	public function show($ticket_id = null)
@@ -51,7 +60,7 @@ class TicketsController extends BaseController
 
 	public function store()
 	{
-
+		die('run checks and store in db');
 	}
 
 	public function update()

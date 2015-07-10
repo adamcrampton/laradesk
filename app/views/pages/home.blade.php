@@ -13,7 +13,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<a class="btn btn-primary">Create a new ticket</a>
+		<a href="/tickets/create" class="btn btn-primary">Create a new ticket</a>
 		<a class="btn btn-primary">View my tickets</a>
 	</div>
 </div>

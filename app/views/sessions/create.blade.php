@@ -12,24 +12,19 @@
 @endif
 
 	<h1>Log In</h1>
-
-	{{ Form::open(['route' => 'sessions.store']) }}
-	<div class="input-group">
-		{{ Form::label('users_email', 'Email:') }}
-		{{ Form:: email('users_email', null, array('class' => 'form-control')) }}
+	<p>Please log in using the form below.</p>
+	<div class="row">
+		{{ Form::open(['route' => 'sessions.store']) }}
+		<div class="col-md-4">
+			<div class="form-group">
+				{{ Form::label('users_email', 'Email:') }}
+				{{ Form::email('users_email', null, array('class' => 'form-control')) }}
+				{{ Form::label('password', 'Password:') }}
+				{{ Form::password('password', array('class' => 'form-control')) }}
+			</div>
+			{{ Form::submit('Log in', array('class' => 'btn btn-primary')) }} 
+		</div>
+		{{ Form::close() }}
 	</div>
-	<div class="input-group">
-		{{ Form::label('password', 'Password:') }}
-		{{ Form::password('password', array('class' => 'form-control')) }}
-	</div>
-
-	<div class="input-group"> 
-		{{ Form::submit('Go', array('class' => 'btn btn-default')) }} 
-	</div>
-
-	<hr />
-	<p>Forgot your password? {{ link_to('/password/remind', 'Click here')}}</p>
-
-	{{ Form::close() }}
-
+	
 @stop
