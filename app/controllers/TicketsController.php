@@ -26,6 +26,9 @@ class TicketsController extends BaseController
 		// Get current logged in user's auth level.
 		$this->user_auth_level = Auth::user()->get_userlevel();
 
+		// Check if current logged in user is Support or Admin user.
+		$this->support_check = Auth::user()->isSupport();
+
 	}
 
 	public function index()
@@ -83,16 +86,14 @@ class TicketsController extends BaseController
 		// Process file if it was uploaded.
 		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
 
-		if (!empty($_FILES['related_image']['name']))
+		if (! empty($_FILES['related_image']['name']))
 		{
 			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
 		}
 		
-		// Check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
-		$support_check = Auth::user()->isSupport();
-
 		// Now process post data.
-		$post_result = $this->tickets->add_ticket(Input::all(), $support_check);
+		// Also check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
+		$post_result = $this->tickets->add_ticket(Input::all(), $this->support_check);
 
 		if ($post_result && $file_result)
 		{
@@ -105,7 +106,30 @@ class TicketsController extends BaseController
 
 	public function update()
 	{
+		// Validate form fields first
+		if (! $this->tickets->isValid($input = Input::all())) 
+		{
+			return Redirect::back()->withInput()->withErrors($this->tickets->errors);
+		}
 
+		// Process file if it was uploaded.
+		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
+
+		if (! empty($_FILES['related_image']['name']))
+		{
+			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
+		}
+		
+		// Now process post data.
+		// Also check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
+		$post_result = $this->tickets->update_ticket(Input::all(), $this->support_check);
+
+		if ($post_result && $file_result)
+		{
+			return Redirect::back()->with('ticket_update_success', 'Ticket updated successfully!');
+		}
+
+		return Redirect::back()->with('ticket_update_failed', 'Sorry, there was a problem updating your ticket. Please contact support.');
 	}
 
 	public function destroy()

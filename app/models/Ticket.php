@@ -81,6 +81,29 @@ Class Ticket extends Eloquent
 		return false;
 	}
 
+	public function update_ticket($ticket_data, $support_check)
+	{
+		// Create ticket object for record to be updated.
+		$ticket = $this->whereMaster_id($ticket_data['ticket_id'])->first();
+
+		$ticket->master_description = $ticket_data['description'];
+		$ticket->master_belongs_to_users_fk = $support_check ? $ticket_data['submitted_by'] : Auth::id(); // Current logged in user if not specificed by support/admin.
+		$ticket->master_assigned_to_users_fk = $support_check ? $ticket_data['assigned_to'] : 0; // The zero value matches other checks in views, where 0 will equate to 'unassigned'.
+		$ticket->master_categories_fk = $ticket_data['category'];
+		$ticket->master_priorities_fk = $ticket_data['priority'];
+		$ticket->master_statuses_fk = $support_check ? $ticket_data['status'] : Status::whereStatuses_name('Open')->first()->statuses_id;
+
+		$result = $ticket->save();
+
+		if ($result)
+		{
+			return true;
+		}
+
+		return false;
+
+	}
+
 	// Process file upload.
 	public function upload_related_image($file_data)
 	{

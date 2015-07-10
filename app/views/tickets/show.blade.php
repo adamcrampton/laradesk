@@ -2,6 +2,22 @@
 
 @section('content')
 
+@if (Session::has('ticket_update_success'))
+<?php $success = Session::get('ticket_update_success'); ?>
+<div class="alert alert-success alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>{{ $success }}</strong>
+</div>
+@endif
+
+@if (Session::has('ticket_update_failed'))
+<?php $failed = Session::get('ticket_update_failed'); ?>
+<div class="alert alert-danger alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>{{ $failed }}</strong>
+</div>
+@endif
+
 <div class="col-md-12">     
 	<div class="row">
 		<p class="lead">This ticket:</p>
