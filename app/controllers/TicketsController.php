@@ -19,14 +19,19 @@ class TicketsController extends BaseController
 			'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
 		];
 
+		// Add in an 'unassigned' item with an index of 0 to the support users list.
+		// This is so we can display this in the view without having to have a database entry for 'unassigned';
+		$this->attributes['support_users_list'][0] = 'unassigned';
+
+		// Get current logged in user's auth level.
+		$this->user_auth_level = Auth::user()->get_userlevel();
+
 	}
 
 	public function index()
 	{
 		// Determine if user is support/admin, or regular staff user. Only show user's tickets if staff.
-		$user_auth_level = Auth::user()->get_userlevel();
-
-		$all_tickets = ($user_auth_level != 'Staff User') ? $this->tickets->all() : $this->tickets->whereMaster_belongs_to_users_fk(Auth::id())->get();
+		$all_tickets = ($this->user_auth_level != 'Staff User') ? $this->tickets->all() : $this->tickets->whereMaster_belongs_to_users_fk(Auth::id())->get();
 
 		return View::make('tickets.index', ['all_tickets' => $all_tickets]);
 	}
@@ -40,6 +45,20 @@ class TicketsController extends BaseController
 	{
 		if ($ticket_id !== null)
 		{
+			// Determine if user is support/admin, or regular staff user. Only show user's tickets if staff.
+			if ($this->user_auth_level == 'Staff User')
+			{
+				// Find user id of staff member that owns this ticket.
+				$ticket_owner = $this->tickets->whereMaster_id($ticket_id)->first()->master_belongs_to_users_fk;
+
+				// If it's not the owner, boot them back to the ticket list with a message.
+				if ($ticket_owner != Auth::id())
+				{
+					return Redirect::route('tickets.index')->with('not_authorised_to_view_ticket', 'Sorry, you are not authorised to view this ticket. Contact support for assistance.');
+				}
+
+			}
+
 			// Create ticket object
 			$ticket = $this->tickets->whereMaster_id($ticket_id)->first();
 

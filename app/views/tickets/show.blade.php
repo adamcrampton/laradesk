@@ -20,7 +20,7 @@
 		</div>
 		<div class="form-group">
 	  		{{ Form::label('assigned_to', 'Assigned To: ') }}
-			{{ Form::select('assigned_to', $attributes['support_users_list'], $ticket->assigned->users_id, ['class' => 'form-control']) }}
+			{{ Form::select('assigned_to', $attributes['support_users_list'], $ticket->master_assigned_to_users_fk ? $ticket->assigned->users_id : 0, ['class' => 'form-control']) }}
 			{{ $errors->first('assigned_to', '<span class="label label-danger">:message</span>') }}
 		</div>
 		
