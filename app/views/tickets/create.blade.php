@@ -45,17 +45,20 @@
 			{{ Form::select('submitted_by', $attributes['staff_users_list'], null, ['class' => 'form-control']) }}
 			{{ $errors->first('submitted_by', '<span class="label label-danger">:message</span>') }}
 		</div>
-
 		<div class="form-group">
 	  		{{ Form::label('assigned_to', 'Assigned To: ') }}
 			{{ Form::select('assigned_to', $attributes['support_users_list'], null, ['class' => 'form-control']) }}
 			{{ $errors->first('assigned_to', '<span class="label label-danger">:message</span>') }}
 		</div>
-
 		<div class="form-group">
 	  		{{ Form::label('status', 'Status: ') }}
 			{{ Form::select('status', $attributes['statuses_list'], null, ['class' => 'form-control']) }}
 			{{ $errors->first('status', '<span class="label label-danger">:message</span>') }}
+		</div>
+		<div class="form-group">
+	  		{{ Form::label('priority', 'Priority: ') }}
+			{{ Form::select('priority', $attributes['priorities_list'], null, ['class' => 'form-control']) }}
+			{{ $errors->first('priority', '<span class="label label-danger">:message</span>') }}
 		</div>		
 	</div>
 

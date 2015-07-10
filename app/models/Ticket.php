@@ -62,14 +62,14 @@ Class Ticket extends Eloquent
 	// ============================================
 
 	// Validate POST and add new ticket.
-	public function add_ticket($ticket_data)
+	public function add_ticket($ticket_data, $support_check)
 	{
 		$this->master_description = $ticket_data['description'];
-		$this->master_belongs_to_users_fk = Auth::id(); // Current logged in user.
-		$this->master_assigned_to_users_fk = 0; // The zero value matches other checks in views, where 0 will equate to 'unassigned'.
+		$this->master_belongs_to_users_fk = $support_check ? $ticket_data['submitted_by'] : Auth::id(); // Current logged in user if not specificed by support/admin.
+		$this->master_assigned_to_users_fk = $support_check ? $ticket_data['assigned_to'] : 0; // The zero value matches other checks in views, where 0 will equate to 'unassigned'.
 		$this->master_categories_fk = $ticket_data['category'];
-		$this->master_priorities_fk = Priority::wherePriorities_name('Medium')->first()->priorities_id;
-		$this->master_statuses_fk = Status::whereStatuses_name('Open')->first()->statuses_id;
+		$this->master_priorities_fk = $support_check ? $ticket_data['priority'] : Priority::wherePriorities_name('Medium')->first()->priorities_id;
+		$this->master_statuses_fk = $support_check ? $ticket_data['status'] : Status::whereStatuses_name('Open')->first()->statuses_id;
 
 		$result = $this->save();
 

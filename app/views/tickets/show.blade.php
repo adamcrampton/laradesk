@@ -46,6 +46,11 @@
 			<span id="content_doc_glyph" class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
 			<span id="ajax-error-doc"></span>
 		</div>
+		<div class="form-group">
+	  		{{ Form::label('priority', 'Priority: ') }}
+			{{ Form::select('priority', $attributes['priorities_list'], $ticket->priority->priorities_id, ['class' => 'form-control']) }}
+			{{ $errors->first('status', '<span class="label label-danger">:message</span>') }}
+		</div>
 	</div>
 	<div class="col-md-12">
 		<hr />

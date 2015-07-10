@@ -31,7 +31,7 @@ class TicketsController extends BaseController
 	public function index()
 	{
 		// Determine if user is support/admin, or regular staff user. Only show user's tickets if staff.
-		$all_tickets = ($this->user_auth_level != 'Staff User') ? $this->tickets->all() : $this->tickets->whereMaster_belongs_to_users_fk(Auth::id())->get();
+		$all_tickets = (Auth::user()->isSupport()) ? $this->tickets->all() : $this->tickets->whereMaster_belongs_to_users_fk(Auth::id())->get();
 
 		return View::make('tickets.index', ['all_tickets' => $all_tickets]);
 	}
@@ -88,8 +88,11 @@ class TicketsController extends BaseController
 			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
 		}
 		
+		// Check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
+		$support_check = Auth::user()->isSupport();
+
 		// Now process post data.
-		$post_result = $this->tickets->add_ticket(Input::all());
+		$post_result = $this->tickets->add_ticket(Input::all(), $support_check);
 
 		if ($post_result && $file_result)
 		{
