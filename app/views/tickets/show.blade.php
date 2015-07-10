@@ -40,17 +40,11 @@
 	</div>
 
 	<div class="col-md-4">
-		<div id="content_doc_container" class="form-group has-feedback">
-			{{ Form::label('content_doc', 'Upload and insert document (max 8mb): ', ['class' => 'control-label']) }}
-			{{ Form::file('content_doc', ['class' => 'form-control']) }}
+		<div id="related_files_container" class="form-group has-feedback">
+			{{ Form::label('related_files', 'Upload related files (max 8mb): ', ['class' => 'control-label']) }}
+			{{ Form::file('related_files', ['class' => 'form-control']) }}
 			<span id="content_doc_glyph" class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
 			<span id="ajax-error-doc"></span>
-		</div>
-		<div id="content_image_container" class="form-group has-feedback">
-			{{ Form::label('content_image', 'Upload and insert image: (max 8mb)', ['class' => 'control-label']) }}
-			{{ Form::file('content_image', ['class' => 'form-control']) }}
-			<span id="content_image_glyph" class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-			<span id="ajax-error-content"></span>
 		</div>
 	</div>
 	<div class="col-md-12">

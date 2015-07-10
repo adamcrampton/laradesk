@@ -35,7 +35,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">LaraDesk</a>
+          <a class="navbar-brand" href="/">LaraDesk</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -43,7 +43,6 @@
             <li><a href="/tickets/create">Create Ticket</a></li>
             <li><a href="/tickets">Show Tickets</a></li>
             <li><a href="#">Admin Area</a></li>
-            <li><a href="/login">Login</a></li>
             <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
