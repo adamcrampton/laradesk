@@ -7,27 +7,6 @@
  //                        __/ |                    | |            
  //                       |___/                     |_|  
 
-// Initialise and config CKEditor
-$(document).ready(function() 
-{
-	CKEDITOR.replace('content_editor', {
-    });
-
-    CKEDITOR.config.width = 540;
-    CKEDITOR.config.height = 220;
-    CKEDITOR.dtd.$removeEmpty.span = 0;
-    CKEDITOR.dtd.$removeEmpty.i = 0;
-    CKEDITOR.config.allowedContent = true;
-    CKEDITOR.config.contentsCss = ['/css/bootstrap.min.css', '/css/font-awesome.min.css', '/css/main.css'];
-    CKEDITOR.config.autoParagraph = false;
-
-    // Configure custom Styles dropdown	
-    CKEDITOR.stylesSet.add( 'default', [
-        { name: 'Button Name',   element: 'a', attributes: { 'class': 'class-name'} },
-    ]);
-
-});
-
 // Ticket Comments
 $(document).ready(function() 
 {

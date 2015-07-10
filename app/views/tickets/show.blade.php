@@ -59,7 +59,7 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			{{ Form::label('description', 'Description: ') }} {{ $errors->first('description', '<span class="label label-danger">:message</span>') }}
-			{{ Form::textarea('description', $ticket->master_description, ['id' => 'content_editor', 'class' => 'form-control']) }}
+			{{ Form::textarea('description', $ticket->master_description, ['class' => 'form-control']) }}
 	  	</div>
 	</div>
 	<div class="col-md-6 comment_box">
