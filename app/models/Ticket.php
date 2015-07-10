@@ -68,7 +68,7 @@ Class Ticket extends Eloquent
 		$this->master_belongs_to_users_fk = $support_check ? $ticket_data['submitted_by'] : Auth::id(); // Current logged in user if not specificed by support/admin.
 		$this->master_assigned_to_users_fk = $support_check ? $ticket_data['assigned_to'] : 0; // The zero value matches other checks in views, where 0 will equate to 'unassigned'.
 		$this->master_categories_fk = $ticket_data['category'];
-		$this->master_priorities_fk = $support_check ? $ticket_data['priority'] : Priority::wherePriorities_name('Medium')->first()->priorities_id;
+		$this->master_priorities_fk = $ticket_data['priority'];
 		$this->master_statuses_fk = $support_check ? $ticket_data['status'] : Status::whereStatuses_name('Open')->first()->statuses_id;
 
 		$result = $this->save();
