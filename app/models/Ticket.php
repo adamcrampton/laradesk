@@ -5,7 +5,9 @@ Class Ticket extends Eloquent
 	protected $table = 'master';
 	protected $primaryKey = 'master_id';
 
-	// DB Relationships
+	// DB Relationships.
+	// ============================================
+
 	public function belongs()
 	{
 		return $this->belongsTo('User', 'master_belongs_to_users_fk', 'users_id');
@@ -29,6 +31,60 @@ Class Ticket extends Eloquent
 	public function status()
 	{
 		return $this->belongsTo('Status', 'master_statuses_fk', 'statuses_id');
+	}
+
+	// Validation setup.
+	// ============================================
+
+	public $rules = 
+	[
+		'category' => 'required',
+		'description' => 'required'
+	];
+
+	public $errors;
+
+	public function isValid($data)
+	{
+		$validation = Validator::make($data, $this->rules);
+
+		if ($validation->passes())
+		{
+			return true;
+		}
+
+		$this->errors = $validation->messages();
+
+		return false;
+	}
+
+	// CRUD functions.
+	// ============================================
+
+	// Validate POST and add new ticket.
+	public function add_ticket($ticket_data)
+	{
+		$this->master_description = $ticket_data['description'];
+		$this->master_belongs_to_users_fk = Auth::id(); // Current logged in user.
+		$this->master_assigned_to_users_fk = 0; // The zero value matches other checks in views, where 0 will equate to 'unassigned'.
+		$this->master_categories_fk = $ticket_data['category'];
+		$this->master_priorities_fk = Priority::wherePriorities_name('Medium')->first()->priorities_id;
+		$this->master_statuses_fk = Status::whereStatuses_name('Open')->first()->statuses_id;
+
+		$result = $this->save();
+
+		if ($result)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	// Process file upload.
+	public function upload_related_image($file_data)
+	{
+
 	}
 
 }

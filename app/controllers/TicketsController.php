@@ -9,6 +9,16 @@ class TicketsController extends BaseController
 		$this->tickets = $tickets;
 
 		$this->beforeFilter('staff');
+
+		// Store attributes array to be used in the functions below.
+		$this->attributes = [
+			'staff_users_list' => User::lists('users_username', 'users_id'),
+			'support_users_list' => User::lists('users_username', 'users_id'),
+			'categories_list' => Category::lists('categories_name', 'categories_id'),
+			'priorities_list' => Priority::lists('priorities_name', 'priorities_id'),
+			'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
+		];
+
 	}
 
 	public function index()
@@ -20,16 +30,7 @@ class TicketsController extends BaseController
 		
 	public function create($create_type = null)
 	{
-		// Create array of vars for various ticket attributes
-		$attributes = [
-			'staff_users_list' => User::lists('users_username', 'users_id'),
-			'support_users_list' => User::lists('users_username', 'users_id'),
-			'categories_list' => Category::lists('categories_name', 'categories_id'),
-			'priorities_list' => Priority::lists('priorities_name', 'priorities_id'),
-			'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
-		];
-
-		return View::make('tickets.create', ['attributes' => $attributes]);
+		return View::make('tickets.create', ['attributes' => $this->attributes]);
 	}
 
 	public function show($ticket_id = null)
@@ -41,17 +42,8 @@ class TicketsController extends BaseController
 
 			// Create array for comments related to this ticket
 			$comments = Comment::whereComments_master_fk($ticket_id)->get();
-
-			// Create array of vars for various ticket attributes
-			$attributes = [
-				'staff_users_list' => User::lists('users_username', 'users_id'),
-				'support_users_list' => User::lists('users_username', 'users_id'),
-				'categories_list' => Category::lists('categories_name', 'categories_id'),
-				'priorities_list' => Priority::lists('priorities_name', 'priorities_id'),
-				'statuses_list' => Status::lists('statuses_name', 'statuses_id'),
-			];
-			
-			return View::make('tickets.show', ['ticket' => $ticket, 'comments' => $comments, 'attributes' => $attributes]);
+		
+			return View::make('tickets.show', ['ticket' => $ticket, 'comments' => $comments, 'attributes' => $this->attributes]);
 		}
 
 		return Redirect::to('/')->with('no_ticket', 'Sorry, this ticket does not exist. Please contact support.');
@@ -60,7 +52,30 @@ class TicketsController extends BaseController
 
 	public function store()
 	{
-		die('run checks and store in db');
+		// Validate form fields first
+		if (! $this->tickets->isValid($input = Input::all())) 
+		{
+			return Redirect::back()->withInput()->withErrors($this->tickets->errors);
+		}
+
+		// Process file if it was uploaded.
+		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
+
+		if (!empty($_FILES['related_image']['name']))
+		{
+			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
+		}
+		
+		// Now process post data.
+		$post_result = $this->tickets->add_ticket(Input::all());
+
+		if ($post_result && $file_result)
+		{
+			return Redirect::route('tickets.index')->with('ticket_add_success', 'Ticket added successfully!');
+		}
+
+		return Redirect::route('tickets.index')->with('ticket_add_failed', 'Sorry, there was a problem creating your ticket. Please contact support.');
+
 	}
 
 	public function update()

@@ -36,8 +36,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
-	
-
 	public function isValid($data)
 	{
 		$validation = Validator::make($data, $this->rules);
@@ -52,6 +50,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return false;
 	}
 
+	// User level checks.
 	public function get_userlevel()
 	{
 		return Userlevel::whereUserlevels_id(Auth::user()->users_userlevels_fk)->first()->userlevels_name;

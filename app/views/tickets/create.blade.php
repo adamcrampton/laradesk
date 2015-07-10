@@ -8,7 +8,9 @@
 <div class="row">
 
 	<div class="col-md-8">
-		<p class="lead">Enter ticket details:</p>
+		<p class="lead">Enter ticket details</p>
+		<p>Please select a category, enter your ticket details, and upload any related files (e.g. screen captures) using the fields below.</p>
+		<p>If you need to edit details of an existing ticket, <a href="/tickets/">click here</a> to find and select your ticket, and add a comment, which will be received by the support staff.<p>
 		<hr />
 		<div class="row">
 			<div class="col-md-6">
@@ -36,7 +38,7 @@
 	@if (Auth::user()->isSupport())
 
 	<div class="col-md-4">
-		<p class="lead">Admin Options:</p>
+		<p class="lead">Admin Options</p>
 		<hr />
 		<div class="form-group">
 	  		{{ Form::label('submitted_by', 'Submitted By: ') }}
