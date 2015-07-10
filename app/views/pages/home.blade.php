@@ -18,8 +18,9 @@
 	</div>
 </div>
 
-
 <hr />
+
+@if (Auth::user()->isSupport())
 
 <h3>Support Staff Options:</h3>
 
@@ -31,6 +32,10 @@
 
 <hr />
 
+@endif
+
+@if (Auth::user()->isAdmin())
+
 <h3>Administrator Options:</h3>
 
 <div class="row">
@@ -41,5 +46,7 @@
 		<a class="btn btn-primary">Manage Priority Levels</a>
 	</div>
 </div>
+
+@endif
 
 @stop

@@ -33,7 +33,8 @@
 	  	</div>
 	</div>		
 	
-	
+	@if (Auth::user()->isSupport())
+
 	<div class="col-md-4">
 		<p class="lead">Admin Options:</p>
 		<hr />
@@ -55,6 +56,9 @@
 			{{ $errors->first('status', '<span class="label label-danger">:message</span>') }}
 		</div>		
 	</div>
+
+	@endif
+
 	<div class="col-md-12">
 		<div class="form-group"> 
 			{{ Form::submit('Create ticket', ['class' => 'btn btn-success']) }} 
