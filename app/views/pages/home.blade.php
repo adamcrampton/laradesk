@@ -14,7 +14,11 @@
 <div class="row">
 	<div class="col-md-12">
 		<a href="/tickets/create" class="btn btn-primary">Create a new ticket</a>
+		@if (Auth::user()->isSupport())
+		<a href="/tickets" class="btn btn-primary">View tickets assigned to me</a>
+		@else
 		<a href="/tickets" class="btn btn-primary">View my tickets</a>
+		@endif
 	</div>
 </div>
 
@@ -26,7 +30,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<a href="/tickets" class="btn btn-primary">View Tickets</a>
+		<a href="/tickets?show_all=true" class="btn btn-primary">View All Tickets</a>
 	</div>
 </div>
 

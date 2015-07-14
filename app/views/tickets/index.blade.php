@@ -26,7 +26,10 @@
 </div>
 @endif
 
-<div class="col-md-12">     
+<div class="col-md-12">
+
+	@if (count($all_tickets))
+
 	<div class="row">
 		<p class="lead">All tickets:</p>
 	</div>
@@ -56,6 +59,12 @@
 			@endforeach
 		</table>
 	</div>
+
+	@else
+	<div class="row">
+		<p class="lead">Sorry, there are no tickets to show.</p>
+	</div>
+	@endif
 
 </div>
 

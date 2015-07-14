@@ -33,8 +33,18 @@ class TicketsController extends BaseController
 
 	public function index()
 	{
-		// Determine if user is support/admin, or regular staff user. Only show user's tickets if staff.
-		$all_tickets = (Auth::user()->isSupport()) ? $this->tickets->all() : $this->tickets->whereMaster_belongs_to_users_fk(Auth::id())->get();
+		// Check if Show All parameter is set to true, and show all if they are at least support staff.
+		if (isset($_GET['show_all']) && $_GET['show_all'] && $this->support_check)
+		{
+			$all_tickets = $this->tickets->all();
+		}
+
+		else
+		{
+			// Determine if user is support/admin, or regular staff user. 
+			// Only show user's tickets if staff, otherwise show tickets assigned to this user (because they're support/admin).
+			$all_tickets = ($this->support_check) ? $this->tickets->whereMaster_assigned_to_users_fk(Auth::id())->get() : $this->tickets->whereMaster_belongs_to_users_fk(Auth::id())->get();
+		}
 
 		return View::make('tickets.index', ['all_tickets' => $all_tickets]);
 	}
