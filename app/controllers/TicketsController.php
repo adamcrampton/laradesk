@@ -105,7 +105,7 @@ class TicketsController extends BaseController
 			$file_upload = new File_upload;
 
 			// Send file data and saved ticket ID.
-			$file_result = $file_upload->upload_related_image(Input::file('related_files'), $post_result['id']);	
+			$file_result = $file_upload->upload_related_files(Input::file('related_files'), $post_result['id']);	
 		}
 		
 		// If the post has saved and there wasn't a file upload problem, success.
@@ -125,27 +125,37 @@ class TicketsController extends BaseController
 
 	public function update()
 	{
+		// Create object for this ticket.
+		$this_ticket = $this->tickets->whereMaster_id(Input::get('ticket_id'))->first();
+
 		// Validate form fields first
 		if (! $this->tickets->isValid($input = Input::all())) 
 		{
 			return Redirect::back()->withInput()->withErrors($this->tickets->errors);
 		}
 
+		// Process post data.
+		// Also check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
+		$post_result = $this->tickets->update_ticket(Input::all(), $this->support_check);
+
 		// Process file if it was uploaded.
 		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
 
-		if (! empty($_FILES['related_files']))
+		if (! empty($_FILES['related_files']['name'][0]))
 		{
-			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
+			$file_upload = new File_upload;
+
+			$file_result = $file_upload->upload_related_files(Input::file('related_files'), $this_ticket->master_id);	
 		}
-		
-		// Now process post data.
-		// Also check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
-		$post_result = $this->tickets->update_ticket(Input::all(), $this->support_check);
 
 		if ($post_result && $file_result)
 		{
 			return Redirect::back()->with('ticket_update_success', 'Ticket updated successfully!');
+		}
+
+		else if ($post_result['result'] && ! $file_result)
+		{
+			return Redirect::route('tickets.index')->with('ticket_add_file_failed', 'Ticket added successfully, but something went wrong with the file upload. Please contact support.');	
 		}
 
 		return Redirect::back()->with('ticket_update_failed', 'Sorry, there was a problem updating your ticket. Please contact support.');

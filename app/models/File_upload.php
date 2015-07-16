@@ -6,7 +6,7 @@ Class File_upload extends Eloquent
 	protected $primaryKey = 'file_uploads_id';
 
 	// Process file upload.
-	public function upload_related_image($file_data, $ticket_id)
+	public function upload_related_files($file_data, $ticket_id)
 	{
 		// Loop through each file and upload using the original name, into a directory named the user's ID.
 		// Also add details into the files table after each upload.

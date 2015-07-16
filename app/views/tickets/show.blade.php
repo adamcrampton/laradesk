@@ -58,9 +58,7 @@
 	<div class="col-md-4">
 		<div id="related_files_container" class="form-group has-feedback">
 			{{ Form::label('related_files', 'Upload related files (max 8mb): ', ['class' => 'control-label']) }}
-			{{ Form::file('related_files', ['class' => 'form-control']) }}
-			<span id="content_doc_glyph" class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-			<span id="ajax-error-doc"></span>
+			{{ Form::file('related_files[]', ['class' => 'form-control', 'multiple' => 'multiple']) }}
 		</div>
 		<div class="form-group">
 	  		{{ Form::label('priority', 'Priority: ') }}
