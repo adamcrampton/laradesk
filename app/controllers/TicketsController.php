@@ -93,19 +93,23 @@ class TicketsController extends BaseController
 			return Redirect::back()->withInput()->withErrors($this->tickets->errors);
 		}
 
-		// Process file if it was uploaded.
-		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
-
-		if (! empty($_FILES['related_image']['name']))
-		{
-			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
-		}
-		
-		// Now process post data.
+		// Process post data.
 		// Also check if user is support/admin - this will tell the add_ticket function to process POST values for submitted/assigned/status fields.
 		$post_result = $this->tickets->add_ticket(Input::all(), $this->support_check);
 
-		if ($post_result && $file_result)
+		// Process file if it was uploaded and ticket was already saved.
+		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
+
+		if ($post_result['result'] && ! empty($_FILES['related_files']['name']))
+		{
+			$file_upload = new File_upload;
+
+			// Send file data and saved ticket ID.
+			$file_result = $file_upload->upload_related_image(Input::file('related_files'), $post_result['id']);	
+		}
+		
+		// If the post has saved and there wasn't a file upload problem, success.
+		if ($post_result['result'] && $file_result)
 		{
 			return Redirect::route('tickets.index')->with('ticket_add_success', 'Ticket added successfully!');
 		}
@@ -125,7 +129,7 @@ class TicketsController extends BaseController
 		// Process file if it was uploaded.
 		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
 
-		if (! empty($_FILES['related_image']['name']))
+		if (! empty($_FILES['related_files']))
 		{
 			$file_result = $this->tickets->upload_related_image(Input::file('related_image'));	
 		}

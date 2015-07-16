@@ -30,7 +30,7 @@
 			<div class="col-md-5">
 				<div id="related_files_container" class="form-group has-feedback">
 					{{ Form::label('related_files', 'Upload related files (max 8mb): ', ['class' => 'control-label']) }}
-					{{ Form::file('related_files', ['class' => 'form-control']) }}
+					{{ Form::file('related_files[]', ['class' => 'form-control', 'multiple' => 'multiple']) }}
 					<span id="content_doc_glyph" class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
 					<span id="ajax-error-upload"></span>
 				</div>

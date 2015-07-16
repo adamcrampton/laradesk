@@ -71,14 +71,18 @@ Class Ticket extends Eloquent
 		$this->master_priorities_fk = $ticket_data['priority'];
 		$this->master_statuses_fk = $support_check ? $ticket_data['status'] : Status::whereStatuses_name('Open')->first()->statuses_id;
 
+		// Save ticket.
 		$result = $this->save();
+
+		// Get ID of saved ticket - we'll need this for the file upload table in case files were uploaded.
+		$saved_ticket_id = $this->master_id;
 
 		if ($result)
 		{
-			return true;
+			return ['result' => true, 'id' => $saved_ticket_id];
 		}
 
-		return false;
+		return ['result' => false, 'id' => null];
 	}
 
 	public function update_ticket($ticket_data, $support_check)
@@ -93,21 +97,18 @@ Class Ticket extends Eloquent
 		$ticket->master_priorities_fk = $ticket_data['priority'];
 		$ticket->master_statuses_fk = $support_check ? $ticket_data['status'] : Status::whereStatuses_name('Open')->first()->statuses_id;
 
+		// Save ticket.
 		$result = $ticket->save();
+
+		// Get ID of saved ticket - we'll need this for the file upload table in case files were uploaded.
+		$saved_ticket_id = $ticket->master_id;
 
 		if ($result)
 		{
-			return true;
+			return ['result' => true, 'id' => $saved_ticket_id];
 		}
 
-		return false;
-
-	}
-
-	// Process file upload.
-	public function upload_related_image($file_data)
-	{
-
+		return ['result' => false, 'id' => null];
 	}
 
 }
