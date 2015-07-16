@@ -100,7 +100,7 @@ class TicketsController extends BaseController
 		// Process file if it was uploaded and ticket was already saved.
 		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
 
-		if ($post_result['result'] && ! empty($_FILES['related_files']['name']))
+		if ($post_result['result'] && ! empty($_FILES['related_files']['name'][0]))
 		{
 			$file_upload = new File_upload;
 
@@ -112,6 +112,11 @@ class TicketsController extends BaseController
 		if ($post_result['result'] && $file_result)
 		{
 			return Redirect::route('tickets.index')->with('ticket_add_success', 'Ticket added successfully!');
+		}
+
+		else if ($post_result['result'] && ! $file_result)
+		{
+			return Redirect::route('tickets.index')->with('ticket_add_file_failed', 'Ticket added successfully, but something went wrong with the file upload. Please contact support.');	
 		}
 
 		return Redirect::route('tickets.index')->with('ticket_add_failed', 'Sorry, there was a problem creating your ticket. Please contact support.');

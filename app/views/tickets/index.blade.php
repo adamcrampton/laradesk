@@ -10,6 +10,14 @@
 </div>
 @endif
 
+@if (Session::has('ticket_add_file_failed'))
+<?php $success_but_file_failed = Session::get('ticket_add_success'); ?>
+<div class="alert alert-warning alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>{{ $success_but_file_failed }}</strong>
+</div>
+@endif
+
 @if (Session::has('ticket_add_failed'))
 <?php $failed = Session::get('ticket_add_failed'); ?>
 <div class="alert alert-danger alert-dismissible" role="alert">
