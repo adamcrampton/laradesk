@@ -90,13 +90,18 @@ Class Ticket extends Eloquent
 		// Create ticket object for record to be updated.
 		$ticket = $this->whereMaster_id($ticket_data['ticket_id'])->first();
 
+		// A non-support user can only change description - run a support check on the rest to make sure they don't try to update by hacking the form HTML
 		$ticket->master_description = $ticket_data['description'];
-		$ticket->master_belongs_to_users_fk = $support_check ? $ticket_data['submitted_by'] : Auth::id(); // Current logged in user if not specificed by support/admin.
-		$ticket->master_assigned_to_users_fk = $support_check ? $ticket_data['assigned_to'] : 0; // The zero value matches other checks in views, where 0 will equate to 'unassigned'.
-		$ticket->master_categories_fk = $ticket_data['category'];
-		$ticket->master_priorities_fk = $ticket_data['priority'];
-		$ticket->master_statuses_fk = $support_check ? $ticket_data['status'] : Status::whereStatuses_name('Open')->first()->statuses_id;
 
+		if ($support_check)
+		{
+			$ticket->master_belongs_to_users_fk = $ticket_data['submitted_by'];
+			$ticket->master_assigned_to_users_fk = $ticket_data['assigned_to'];
+			$ticket->master_categories_fk = $ticket_data['category'];
+			$ticket->master_priorities_fk = $ticket_data['priority'];
+			$ticket->master_statuses_fk = $ticket_data['status'];
+		}
+		
 		// Save ticket.
 		$result = $ticket->save();
 

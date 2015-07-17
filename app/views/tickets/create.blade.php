@@ -40,7 +40,7 @@
 	  	</div>
 	</div>		
 	
-	@if (Auth::user()->isSupport())
+	@if ($support_check)
 
 	<div class="col-md-4">
 		<p class="lead">Admin Options</p>

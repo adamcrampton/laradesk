@@ -10,6 +10,14 @@
 </div>
 @endif
 
+@if (Session::has('ticket_add_file_failed'))
+<?php $success_but_file_failed = Session::get('ticket_add_success'); ?>
+<div class="alert alert-warning alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>{{ $success_but_file_failed }}</strong>
+</div>
+@endif
+
 @if (Session::has('ticket_update_failed'))
 <?php $failed = Session::get('ticket_update_failed'); ?>
 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -31,12 +39,14 @@
   	<div class="col-md-4">
 		<div class="form-group">
 	  		{{ Form::label('submitted_by', 'Submitted By: ') }}
-			{{ Form::select('submitted_by', $attributes['staff_users_list'], $ticket->belongs->users_id, ['class' => 'form-control']) }}
+
+			{{ Form::select('submitted_by', $attributes['staff_users_list'], $ticket->belongs->users_id, ['class' => 'form-control', $disabled_check]) }}
+
 			{{ $errors->first('submitted_by', '<span class="label label-danger">:message</span>') }}
 		</div>
 		<div class="form-group">
 	  		{{ Form::label('assigned_to', 'Assigned To: ') }}
-			{{ Form::select('assigned_to', $attributes['support_users_list'], $ticket->master_assigned_to_users_fk ? $ticket->assigned->users_id : 0, ['class' => 'form-control']) }}
+			{{ Form::select('assigned_to', $attributes['support_users_list'], $ticket->master_assigned_to_users_fk ? $ticket->assigned->users_id : 0, ['class' => 'form-control', $disabled_check]) }}
 			{{ $errors->first('assigned_to', '<span class="label label-danger">:message</span>') }}
 		</div>
 		
@@ -45,12 +55,12 @@
 	<div class="col-md-4">
 		<div class="form-group">
 	  		{{ Form::label('category', 'Category: ') }}
-			{{ Form::select('category', $attributes['categories_list'], $ticket->category->categories_id, ['class' => 'form-control']) }}
+			{{ Form::select('category', $attributes['categories_list'], $ticket->category->categories_id, ['class' => 'form-control', $disabled_check]) }}
 			{{ $errors->first('category', '<span class="label label-danger">:message</span>') }}
 		</div>
 		<div class="form-group">
 	  		{{ Form::label('status', 'Status: ') }}
-			{{ Form::select('status', $attributes['statuses_list'], $ticket->status->statuses_id, ['class' => 'form-control']) }}
+			{{ Form::select('status', $attributes['statuses_list'], $ticket->status->statuses_id, ['class' => 'form-control', $disabled_check]) }}
 			{{ $errors->first('status', '<span class="label label-danger">:message</span>') }}
 		</div>
 	</div>
@@ -62,7 +72,7 @@
 		</div>
 		<div class="form-group">
 	  		{{ Form::label('priority', 'Priority: ') }}
-			{{ Form::select('priority', $attributes['priorities_list'], $ticket->priority->priorities_id, ['class' => 'form-control']) }}
+			{{ Form::select('priority', $attributes['priorities_list'], $ticket->priority->priorities_id, ['class' => 'form-control', $disabled_check]) }}
 			{{ $errors->first('status', '<span class="label label-danger">:message</span>') }}
 		</div>
 	</div>

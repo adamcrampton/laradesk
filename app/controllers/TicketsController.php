@@ -51,7 +51,7 @@ class TicketsController extends BaseController
 		
 	public function create($create_type = null)
 	{
-		return View::make('tickets.create', ['attributes' => $this->attributes]);
+		return View::make('tickets.create', ['attributes' => $this->attributes, 'support_check' => $this->support_check]);
 	}
 
 	public function show($ticket_id = null)
@@ -75,10 +75,13 @@ class TicketsController extends BaseController
 			// Create ticket object
 			$ticket = $this->tickets->whereMaster_id($ticket_id)->first();
 
-			// Create array for comments related to this ticket
+			// Create array for comments related to this ticket.
 			$comments = Comment::whereComments_master_fk($ticket_id)->get();
+
+			// This variable allows us to insert 'disabled' into input fields where user has less than support permissions.
+			$disabled_check = $this->support_check ? null : 'disabled';
 		
-			return View::make('tickets.show', ['ticket' => $ticket, 'comments' => $comments, 'attributes' => $this->attributes]);
+			return View::make('tickets.show', ['ticket' => $ticket, 'comments' => $comments, 'attributes' => $this->attributes, 'support_check' => $this->support_check, 'disabled_check' => $disabled_check]);
 		}
 
 		return Redirect::to('/')->with('no_ticket', 'Sorry, this ticket does not exist. Please contact support.');
@@ -87,7 +90,7 @@ class TicketsController extends BaseController
 
 	public function store()
 	{
-		// Validate form fields first
+		// Validate form fields first.
 		if (! $this->tickets->isValid($input = Input::all())) 
 		{
 			return Redirect::back()->withInput()->withErrors($this->tickets->errors);
@@ -98,7 +101,7 @@ class TicketsController extends BaseController
 		$post_result = $this->tickets->add_ticket(Input::all(), $this->support_check);
 
 		// Process file if it was uploaded and ticket was already saved.
-		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
+		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs.
 
 		if ($post_result['result'] && ! empty($_FILES['related_files']['name'][0]))
 		{
@@ -139,7 +142,7 @@ class TicketsController extends BaseController
 		$post_result = $this->tickets->update_ticket(Input::all(), $this->support_check);
 
 		// Process file if it was uploaded.
-		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs
+		$file_result = true; // Set default to true in case there's no file attach. False will be returned if there's probs.
 
 		if (! empty($_FILES['related_files']['name'][0]))
 		{
