@@ -46,7 +46,7 @@ function add_comment(event)
         	if (response.comment_status == 'success')
         	{
         		// Append new comment to list
-        		$('#comment_list').append('<li>' + response.comment_text +'</li>');
+        		$('ul#comment_list').append('<li class="list-group-item">' + response.comment_text +'</li>');
 
         		// Show success message
         		$('#comment_add_success').addClass('show');

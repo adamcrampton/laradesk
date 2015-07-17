@@ -88,7 +88,7 @@
 	<div class="col-md-6 comment_box">
 	  	<div class="form-group"> 
 			{{ Form::label('comments', 'Comments: ') }} {{ Form::button('Add Comment', ['id' => 'new_comment', 'class' => 'btn btn-xs btn-primary pull-right', 'data-toggle' => 'modal', 'data-target' => '#comment_modal']) }}
-			<ul id="list-group">
+			<ul id="comment_list">
 			@foreach($comments as $comment)
 				<li class="list-group-item">{{ 'By <strong>' . $comment->users->users_username . '</strong> at ' . $comment->updated_at . '<br />' . $comment->comments_comment }}</li>
 			@endforeach
