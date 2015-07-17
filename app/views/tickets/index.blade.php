@@ -45,8 +45,8 @@
 	<div class="row">
 		<table class="table table-striped">
 			<thead>
-				<th>ID</th>
-				<th>User</th>
+				<th>Ticket ID</th>
+				<th>Name</th>
 				<th>Description</th>
 				<th>Category</th>
 				<th>Priority</th>

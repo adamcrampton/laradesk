@@ -41,8 +41,11 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/tickets/create">Create Ticket</a></li>
-            <li><a href="/tickets">Show Tickets</a></li>
+            <li><a href="/tickets">Show My Tickets</a></li>
+            @if (Auth::user()->isSupport())
+            <li><a href="/tickets?show_all=true">Show All Tickets</a></li>
             <li><a href="#">Admin Area</a></li>
+            @endif
             <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->

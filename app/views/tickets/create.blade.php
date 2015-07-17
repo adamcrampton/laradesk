@@ -22,7 +22,7 @@
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-			  		{{ Form::label('priority', 'Priority: ') }}
+			  		{{ Form::label('priority', 'Requested Priority: ') }}
 					{{ Form::select('priority', $attributes['priorities_list'], null, ['class' => 'form-control']) }}
 					{{ $errors->first('priority', '<span class="label label-danger">:message</span>') }}
 				</div>
