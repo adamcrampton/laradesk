@@ -1,3 +1,5 @@
+(*** ABANDONED PROJECT :( ***)
+
 A Laravel 4.2 based helpdesk ticketing system.
 
 Recommend that you use Scotchbox Vagrant for setting this up:
